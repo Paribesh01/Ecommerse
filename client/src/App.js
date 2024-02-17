@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+// import { useDispatch, useSelector } from "react-redux";
+// import { increment, decrement } from "./redux/slices/counter/index";
+import "./App.css";
+import Home from "./pages/home/home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Fotter from "./components/Fotter";
+import Login from "./pages/login/Login";
+import Signup from "./pages/signup/Signup";
+
+import Nav from "./components/Nav";
+import Cart from "./components/Cart";
 
 function App() {
+  // const count = useSelector((state) => state.counter);
+  // const dispatch = useDispatch();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    /* <header className="App-header">
+        <button onClick={() => dispatch(increment())}>+</button>
+        <h1>counter is {count}</h1>
+        <button onClick={() => dispatch(decrement())}>-</button>
+      </header> */
+    <BrowserRouter>
+      <Nav />
+      <Cart />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+      <Fotter />
+    </BrowserRouter>
   );
 }
 
