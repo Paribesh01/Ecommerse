@@ -75,9 +75,9 @@ const Nav = () => {
             </svg>
           </li>
           <li>
-            <a class="text-sm text-gray-400 hover:text-gray-500" href="#">
-              Services
-            </a>
+            <Link class="text-sm text-gray-400 hover:text-gray-500" to="/shop">
+              Shop
+            </Link>
           </li>
           <li class="text-gray-300">
             <svg
@@ -196,12 +196,12 @@ const Nav = () => {
                 </a>
               </li>
               <li class="mb-1">
-                <a
+                <Link
                   class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                  href="#"
+                  to="/shop"
                 >
-                  Services
-                </a>
+                  Shop
+                </Link>
               </li>
               <li class="mb-1">
                 <a

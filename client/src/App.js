@@ -6,9 +6,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Fotter from "./components/Fotter";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
-
+import Shop from "./pages/shop/shop";
 import Nav from "./components/Nav";
 import Cart from "./components/Cart";
+import Product from "./pages/product/product";
 
 function App() {
   // const count = useSelector((state) => state.counter);
@@ -26,6 +27,8 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/product" element={<Product />} />
       </Routes>
       <Fotter />
     </BrowserRouter>
