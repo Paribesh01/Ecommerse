@@ -3,6 +3,7 @@ const dbconn = require("./dbconn");
 const cors = require("cors");
 const userRouter = require("./router/user");
 const productRouter = require("./router/product");
+const authRouter = require("./middle/authfront");
 const cookieParser = require("cookie-parser");
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(
 // Handle preflight requests for all routes
 app.options("*", cors());
 
+app.use("/verify", authRouter);
 app.use("/user", userRouter);
 app.use("/product", productRouter);
 
