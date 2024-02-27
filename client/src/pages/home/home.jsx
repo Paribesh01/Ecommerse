@@ -1,11 +1,71 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Catbox from "../../components/Catbox";
 import Box from "../../components/Box";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 // import { increment, decrement } from "./redux/slices/counter/index";
-import { convert } from "../../redux/slices/counter/index";
+
+// import { useDispatch, useSelector } from "react-redux";
+// import { increment, decrement } from "./redux/slices/counter/index";
+// import { user } from "../../redux/slices/user/index";
+// import verifyToken from "../../util/verify";
+// import { convert } from "../../redux/slices/counter/index";
+import { Navigate, useNavigate } from "react-router-dom";
+import verifyToken from "../../util/verify";
+import axios from "axios";
 
 const Home = () => {
+
+const navigate = useNavigate();
+  // const isUser = useSelector((state) => state.user);
+  // const dispatch = useDispatch();
+  // console.log("1 "+email)
+  useEffect(()=>{
+
+    // const verifyToken = async () => {
+    //   try {
+    //     const response = await axios.post(
+    //       "http://localhost:4000/verify",
+    //       {},
+    //       { withCredentials: true }
+    //     );
+    //     console.log("responce is " + response);
+    //     if (response.data.user) {
+    //       console.log("welcome");
+    //       return response.data.user.email;
+    //     } else {
+    //       console.log("error while verifying ");
+    //       navigate("/login");
+          
+    //     }
+    //   } catch (error) {
+    //     console.error("Error verifying token:", error);
+        
+    //     navigate("/login");
+    //   }
+    // };
+
+
+   const checkToken = async () => {
+    const result = await verifyToken();
+    if (result === "no") {
+      navigate("/login");
+    } else {
+      console.log("User email:", result);
+      // Proceed with rendering the home page content for authenticated users
+    }
+  };
+
+  checkToken();
+    }
+
+
+
+
+  ,[navigate])
+  
+
+ 
+  
   return (
     <div>
       <div className=" hero flex  h-full w-full items-center justify-center">
@@ -21,7 +81,7 @@ const Home = () => {
         <img
           className=""
           src="https://flone.jamstacktemplates.dev/assets/img/slider/single-slide-hm1-2.png"
-          alt=""
+          alt="image"
         />
       </div>
       <div className=" below-hero m-10">

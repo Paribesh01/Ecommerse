@@ -1,6 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const emailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const passwordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handelSumbit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:4000/user/login",
+        { email: email, password: password },
+        { withCredentials: true }
+      );
+      //   console.log(res);
+
+      if (res.data.success) {
+        navigate("/");
+      } else {
+        alert(res.data.error);
+      }
+    } catch {
+      alert("Error");
+      console.log("Error while login ");
+    }
+  };
+
   return (
     <div>
       <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -17,7 +53,7 @@ const Login = () => {
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" action="#" method="POST">
+          <form class="space-y-6" onSubmit={handelSumbit} >
             <div>
               <label
                 for="email"
@@ -27,6 +63,7 @@ const Login = () => {
               </label>
               <div class="mt-2">
                 <input
+                onChange={emailChange}
                   id="email"
                   name="email"
                   type="email"
@@ -56,6 +93,7 @@ const Login = () => {
               </div>
               <div class="mt-2">
                 <input
+                onChange={passwordChange}
                   id="password"
                   name="password"
                   type="password"

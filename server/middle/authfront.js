@@ -6,6 +6,7 @@ module.exports = userVerify = (req, res) => {
   const token = req.cookies.token;
   // console.log(token + " from verifyyyy");
   if (!token) {
+    console.log("un man un");
     return res.status(401).json({ error: "unauthorized user" });
   }
 
@@ -27,3 +28,4 @@ module.exports = userVerify = (req, res) => {
     }
   });
 };
+
