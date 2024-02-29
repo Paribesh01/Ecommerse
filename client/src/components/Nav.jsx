@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import { increment, decrement } from "./redux/slices/counter/index";
 import { convert } from "../redux/slices/counter/index";
+import { changeUser } from "../redux/slices/counter/index";
 
 const Nav = () => {
   const count = useSelector((state) => state.convert);
+  const user = useSelector((state)=>state.changeUser)
   const dispatch = useDispatch();
 
 
