@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   BrowserRouter,
   Route,
@@ -26,6 +26,7 @@ function App() {
 
 function AppContent() {
   const navigate = useNavigate();
+  const [isUser, setUser] = useState(false);
 
   const verifyToken = async () => {
     try {
@@ -36,12 +37,15 @@ function AppContent() {
       );
 
       if (response.data.user && response.data.user.email) {
+        setUser(true);
         return true; // Set user to true if authenticated
       } else {
+        setUser(false);
         return false; // Set user to false if not authenticated
       }
     } catch (error) {
       console.error("Error verifying token:", error);
+      setUser(false);
       return false; // Set user to false in case of error
     }
   };
@@ -74,7 +78,7 @@ function AppContent() {
 
   return (
     <>
-      <Nav />
+      <Nav isUser={isUser} />
       <Cart />
       <Routes>
         <Route path="/login" element={<Login />} />
