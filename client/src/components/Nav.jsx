@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import { increment, decrement } from "./redux/slices/counter/index";
 import { convert } from "../redux/slices/counter/index";
+import { changeUser } from "../redux/slices/counter/index";
+import axios from "axios";
+import verifyToken from "../util/verify";
 
-const Nav = () => {
+const Nav = (props) => {
   const count = useSelector((state) => state.convert);
+  // const user = useSelector((state)=>state.changeUser)
   const dispatch = useDispatch();
+  // const [user,setUser] = useState(false)
+  const user = props.isUser;
+  // useEffect(()=>{
+  //   const result  = verifyToken()
+  //   if(result=="no"){
+  //     setUser(false)
+  //   }else{
+  //     setUser(true)
+  //   }
+  //   console.log(user)
+  // },[user])
 
 
   return (
@@ -123,8 +138,64 @@ const Nav = () => {
             </a>
           </li>
         </ul>
+        
 
+        {user ? (
+          <div>
+
+          <Link
+          onClick={() => {
+            dispatch(convert());
+          }}
+          className=" mr-4"
+          >
+          <img
+            className=" w-6"
+            src="https://img.icons8.com/?size=50&id=9671&format=png"
+            alt=""
+            />
+        </Link>
+          <Link
+            className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200"
+            to="/logout"
+            >
+            Logout
+          </Link>
+            </div>
+
+        ) : (
+          <div>
+          <Link
+            className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200"
+            to="/login"
+          >
+            Login
+          </Link>
+          <Link
+          onClick={() => {
+            dispatch(convert());
+          }}
+          className=" mr-4"
+        >
+          <img
+            className=" w-6"
+            src="https://img.icons8.com/?size=50&id=9671&format=png"
+            alt=""
+          />
+        </Link>
         <Link
+          class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+          to="/signup"
+        >
+          Sign up
+        </Link>
+          </div>
+        )}
+
+
+
+
+        {/* <Link
           class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
           to="/login"
         >
@@ -147,7 +218,7 @@ const Nav = () => {
           to="/signup"
         >
           Sign up
-        </Link>
+        </Link> */}
       </nav>
       <div class="navbar-menu relative z-50 hidden">
         <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
